@@ -467,18 +467,16 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         self.view.backgroundColor = [UIColor clearColor];
     } completion:nil];
 
-    CGRect senderViewOriginalFrame = _senderViewForAnimation.superview ? [_senderViewForAnimation.superview convertRect:_senderViewForAnimation.frame toView:nil] : _senderViewOriginalFrame;
-
     if(_usePopAnimation)
     {
         [self animateView:resizableImageView
-                  toFrame:senderViewOriginalFrame
+                  toFrame:_senderViewOriginalFrame
                completion:completion];
     }
     else
     {
         [UIView animateWithDuration:_animationDuration animations:^{
-            resizableImageView.layer.frame = senderViewOriginalFrame;
+            resizableImageView.layer.frame = _senderViewOriginalFrame;
         } completion:^(BOOL finished) {
             completion();
         }];
